@@ -1,21 +1,22 @@
-
-
 export const INC_COUNT = "INC-COUNT"
 export const RES_COUNT = "RES-COUNT"
 export const SET_COUNT = "SET-COUNT"
+export const SET_SETTINGS = "SET-SETTINGS"
 
 
-export type ActionType = IncCountAT | ResCountAT | SetCountAT
+export type ActionType = IncCountAT | ResCountAT | SetCountAT | ChangeSettingsAT
 
 export type IncCountAT = ReturnType<typeof incCountAC>
 export type ResCountAT = ReturnType<typeof resCountAC>
 export type SetCountAT = ReturnType<typeof setCountAC>
+export type ChangeSettingsAT = ReturnType<typeof changeSettingsAC>
 
 
 const initialState = {
-    maxValue: 5,
     startValue: 0,
-    count: 0
+    maxValue: 10,
+    count: 0,
+    isSettings: true
 }
 
 export type CounterType = typeof initialState
@@ -29,11 +30,15 @@ export const counterReducer = (state: CounterType = initialState, action: Action
         case SET_COUNT:
             return {
                 ...state,
-                startValue: action.startValue,
-                maxValue: action.maxValue,
-                count: action.startValue
+                startValue: action.start,
+                maxValue: action.max,
+                count: action.start
             }
-
+        case SET_SETTINGS:
+            return {
+                ...state,
+                isSettings: !action.isSettings
+            }
         default:
             return state
     }
@@ -48,13 +53,18 @@ export const incCountAC = (count: number) => ({
 
 export const resCountAC = (count: number, startValue: number) => ({
     type: RES_COUNT,
-    startValue,
-    count
+    count,
+    startValue
 }) as const
 
-export const setCountAC = (startValue: number, maxValue: number) => ({
+export const setCountAC = (start: number, max: number) => ({
     type: SET_COUNT,
-    startValue,
-    maxValue
+    start,
+    max
+}) as const
+
+export const changeSettingsAC = (isSettings: boolean) => ({
+    type: SET_SETTINGS,
+    isSettings
 }) as const
 
