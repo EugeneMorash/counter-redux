@@ -49,11 +49,11 @@ test('isSettings could could be toggled', () => {
         maxValue: 10,
         startValue: 5,
         count: 0,
-        isSettings: true
+        isSettings: false
     }
 
     const newState = counterReducer(state, changeSettingsAC(true))
-    expect(newState.isSettings).toBe(false)
+    expect(newState.isSettings).toBe(true)
 
 })
 
