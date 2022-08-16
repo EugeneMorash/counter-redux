@@ -32,7 +32,8 @@ const useStyles = makeStyles(() => ({
         width: 100,
         fontSize: 25,
         fontWeight: 'bold',
-        textAlign: 'center'
+        textAlign: 'center',
+        // backgroundColor: "gold"
     }
 }))
 
@@ -78,32 +79,45 @@ function App() {
                         Max value: <input type="number"
                                           onChange={onMaxChangeValue}
                                           value={counter.maxValue}
-                                          className={classes.input}/>
+                                          className={classes.input}
+                                          style={(counter.maxValue < 0 ||
+                                              counter.maxValue <= counter.startValue)
+                                              ?
+                                              {backgroundColor: 'red'} : {backgroundColor: 'gold'}}
+                    />
                         <br/>
                         Start value: <input type="number"
                                             onChange={onStartChangeValue}
                                             value={counter.startValue}
                                             className={classes.input}
+                                            style={(counter.startValue < 0 ||
+                                                counter.maxValue <= counter.startValue)
+                                                ?
+                                                {backgroundColor: 'red'} : {backgroundColor: 'gold'}}
                     />
                         <br/>
                         <Button
                             variant="outlined"
                             className={classes.button}
                             onClick={onSetClickHandler}
+                            disabled={counter.startValue < 0 ||
+                                counter.maxValue <= 0 ||
+                                counter.maxValue === counter.startValue ||
+                                !counter.isSettings}
                         >
                             Set
                         </Button>
                     </Paper>
                     <Paper className={classes.paperStyle}>
                         <div style={counter.count === counter.maxValue ? {color: "red"} : {}}>
-                            {counter.startValue >= counter.maxValue ? "Invalid value!" : counter.count}
+                            {(counter.startValue >= counter.maxValue || counter.startValue < 0) ? "Invalid value!" : counter.count}
                         </div>
 
                         <Button
                             variant="outlined"
                             className={classes.button}
                             onClick={onIncClickHandler}
-                            disabled={counter.count === counter.maxValue || counter.isSettings}>
+                            disabled={counter.count === counter.maxValue || counter.startValue < 0 || counter.isSettings}>
                             Inc
                         </Button>
                         <Button variant="outlined" className={classes.button} onClick={onResClickHandler}
