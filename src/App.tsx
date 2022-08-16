@@ -1,8 +1,15 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import {Button, Container, makeStyles, Paper} from "@material-ui/core";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./redux/store";
-import {CounterType, incCountAC, resCountAC, setCountAC} from "./redux/state-reducer";
+import {
+    changeSettingsAC,
+    CounterType,
+    incCountAC,
+    resCountAC,
+    setCountAC, setMaxValueAC,
+    setStartValueAC
+} from "./redux/state-reducer";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -20,17 +27,22 @@ const useStyles = makeStyles(() => ({
         backgroundColor: "gold",
         border: '2px solid green',
         borderRadius: 10
+    },
+    input: {
+        width: 100,
+        fontSize: 25,
+        fontWeight: 'bold',
+        textAlign: 'center'
     }
 }))
 
-
 function App() {
+
     const classes = useStyles()
 
     const counter = useSelector<AppRootStateType, CounterType>(
         (newState) => newState.counter
     )
-
 
     const dispatch = useDispatch()
 
@@ -43,19 +55,19 @@ function App() {
         dispatch(resCountAC(counter.count, counter.startValue))
     };
 
-    const [start, setStart] = useState(counter.startValue)
-    const [max, setMax] = useState(counter.maxValue)
-
     const onStartChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
-        setStart(Number(e.currentTarget.value))
+        dispatch(setStartValueAC(Number(e.currentTarget.value)))
+        dispatch(changeSettingsAC(true))
     };
 
     const onMaxChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
-        setMax(Number(e.currentTarget.value))
+        dispatch(setMaxValueAC(Number(e.currentTarget.value)))
+        dispatch(changeSettingsAC(true))
     };
 
     const onSetClickHandler = () => {
-        dispatch(setCountAC(start, counter.maxValue))
+        dispatch(setCountAC(counter.startValue, counter.maxValue))
+        dispatch(changeSettingsAC(false))
     };
 
     return (
@@ -63,17 +75,41 @@ function App() {
             <Container fixed>
                 <main className={classes.main}>
                     <Paper className={classes.paperStyle}>
-                        Max value: <input type="number" onChange={onMaxChangeValue} value={max}/>
+                        Max value: <input type="number"
+                                          onChange={onMaxChangeValue}
+                                          value={counter.maxValue}
+                                          className={classes.input}/>
                         <br/>
-                        Start value: <input type="number" onChange={onStartChangeValue} value={start}/>
+                        Start value: <input type="number"
+                                            onChange={onStartChangeValue}
+                                            value={counter.startValue}
+                                            className={classes.input}
+                    />
                         <br/>
-                        <Button variant="outlined" className={classes.button} onClick={onSetClickHandler}>Set</Button>
+                        <Button
+                            variant="outlined"
+                            className={classes.button}
+                            onClick={onSetClickHandler}
+                        >
+                            Set
+                        </Button>
                     </Paper>
                     <Paper className={classes.paperStyle}>
-                        {counter.count}
-                        <br/>
-                        <Button variant="outlined" className={classes.button} onClick={onIncClickHandler}>Inc</Button>
-                        <Button variant="outlined" className={classes.button} onClick={onResClickHandler}>Reset</Button>
+                        <div style={counter.count === counter.maxValue ? {color: "red"} : {}}>
+                            {counter.startValue >= counter.maxValue ? "Invalid value!" : counter.count}
+                        </div>
+
+                        <Button
+                            variant="outlined"
+                            className={classes.button}
+                            onClick={onIncClickHandler}
+                            disabled={counter.count === counter.maxValue || counter.isSettings}>
+                            Inc
+                        </Button>
+                        <Button variant="outlined" className={classes.button} onClick={onResClickHandler}
+                                disabled={counter.count === counter.startValue || counter.isSettings}>
+                            Reset
+                        </Button>
                     </Paper>
 
                 </main>
