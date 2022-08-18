@@ -7,12 +7,12 @@ export const SET_MAX = 'SET-MAX'
 
 
 export type ActionType =
-    IncCountAT |
-    ResCountAT |
-    SetCountAT |
-    ChangeSettingsAT |
-    setStartValueAT |
-    setMaxValueAT
+    | IncCountAT
+    | ResCountAT
+    | SetCountAT
+    | ChangeSettingsAT
+    | setStartValueAT
+    | setMaxValueAT
 
 export type IncCountAT = ReturnType<typeof incCountAC>
 export type ResCountAT = ReturnType<typeof resCountAC>
@@ -33,8 +33,9 @@ export type CounterType = typeof initialState
 
 export const counterReducer = (state: CounterType = initialState, action: ActionType) => {
     switch (action.type) {
-        case INC_COUNT:
+        case INC_COUNT: {
             return {...state, count: action.count + 1}
+        }
         case RES_COUNT:
             return {...state, count: action.startValue}
         case SET_COUNT:
@@ -50,15 +51,15 @@ export const counterReducer = (state: CounterType = initialState, action: Action
                 isSettings: action.isSettings
             }
         case SET_START:
-        return {
-            ...state,
-            startValue: action.startValue
-        }
-         case SET_MAX:
-        return {
-            ...state,
-            maxValue: action.maxValue
-        }
+            return {
+                ...state,
+                startValue: action.startValue
+            }
+        case SET_MAX:
+            return {
+                ...state,
+                maxValue: action.maxValue
+            }
 
         default:
             return state
