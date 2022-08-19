@@ -37,7 +37,8 @@ export function CountBlock() {
 
     return (
         <Box className={classes.box}>
-            <Box style={counter.count === counter.maxValue ? {color: "red"} : {}}>
+            <Box
+                style={(counter.count === counter.maxValue || counter.startValue === counter.maxValue) ? {color: "red"} : {}}>
                 <p>{getCondition()}</p>
             </Box>
             <ButtonGroup disableElevation variant="contained" size='large' style={{marginTop: 30}}>

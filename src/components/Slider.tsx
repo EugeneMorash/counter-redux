@@ -32,7 +32,7 @@ export default function RangeSlider() {
                 onChange={handleChange}
                 valueLabelDisplay="auto"
                 aria-labelledby="range-slider"
-                style={{width: "90%"}}
+                style={{width: "100%"}}
             />
         </Box>
     );

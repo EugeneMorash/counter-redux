@@ -6,17 +6,14 @@ import Grid from "@material-ui/core/Grid";
 import {useStyles} from "./components/Styles";
 import Paper from "@material-ui/core/Paper";
 
-
 function App() {
 
     const classes = useStyles();
-
 
     return (
         <div className={classes.body}>
             <Container fixed>
                 <Grid container spacing={3}>
-                    {/*<Grid item xs={6} component={Card}>*/}
                     <Grid item xs={6}>
                         <Paper className={classes.paper} elevation={3}>
                             <SetBlock/>

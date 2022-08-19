@@ -7,7 +7,6 @@ import Button from "@material-ui/core/Button";
 import RangeSlider from "./Slider";
 import Box from '@material-ui/core/Box';
 
-
 export function SetBlock() {
 
     const classes = useStyles();
@@ -18,26 +17,10 @@ export function SetBlock() {
 
     const dispatch = useDispatch()
 
-    // const onStartChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
-    //     dispatch(setStartValueAC(Number(e.currentTarget.value)))
-    //     dispatch(changeSettingsAC(true))
-    // };
-    //
-    // const onMaxChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
-    //     dispatch(setMaxValueAC(Number(e.currentTarget.value)))
-    //     dispatch(changeSettingsAC(true))
-    // };
-
     const onSetClickHandler = () => {
         dispatch(setCountAC(counter.startValue, counter.maxValue))
         dispatch(changeSettingsAC(false))
     };
-
-
-    // const checkValidValue = (value: number) => {
-    //     const checkLimits = counter.maxValue <= counter.startValue
-    //     return {backgroundColor: (value < 0 || checkLimits) ? 'red' : 'lightblue'}
-    // };
 
     const isSetDisable =
         counter.startValue < 0 ||
@@ -48,34 +31,11 @@ export function SetBlock() {
 
     return (
         <Box className={classes.box}>
-            <Box m={1}>Max value: {counter.maxValue}</Box>
-            {/*<TextField*/}
-            {/*    id="outlined-number"*/}
-            {/*    type="number"*/}
-            {/*    InputLabelProps={{*/}
-            {/*        shrink: true,*/}
-            {/*    }}*/}
-            {/*    variant="outlined"*/}
-            {/*    onChange={onMaxChangeValue}*/}
-            {/*    value={counter.maxValue}*/}
-            {/*    style={checkValidValue(counter.maxValue)}*/}
-            {/*/>*/}
 
+            <Box m={1}>Max value: {counter.maxValue}</Box>
             <Box m={1}>Start value: {counter.startValue}</Box>
 
-            {/*<TextField*/}
-            {/*    id="outlined-number"*/}
-            {/*    type="number"*/}
-            {/*    InputLabelProps={{*/}
-            {/*        shrink: true,*/}
-            {/*    }}*/}
-            {/*    variant="outlined"*/}
-            {/*    onChange={onStartChangeValue}*/}
-            {/*    value={counter.startValue}*/}
-            {/*    style={checkValidValue(counter.startValue)}*/}
-            {/*/>*/}
-
-            <RangeSlider />
+            <RangeSlider/>
 
             <Button variant="contained"
                     size="large"
