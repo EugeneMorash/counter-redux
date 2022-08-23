@@ -6,6 +6,7 @@ import {useStyles} from "../components/Styles";
 import Button from "@material-ui/core/Button";
 import RangeSlider from "./Slider";
 import Box from '@material-ui/core/Box';
+import {Dispatch} from "redux";
 
 export function SetBlock() {
 
@@ -15,7 +16,8 @@ export function SetBlock() {
         (newState) => newState.counter
     )
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<Dispatch>()
+
 
     const onSetClickHandler = () => {
         dispatch(setCountAC(counter.startValue, counter.maxValue))
@@ -37,7 +39,8 @@ export function SetBlock() {
 
             <RangeSlider/>
 
-            <Button variant="contained"
+            <Button variant="outlined"
+                    color="primary"
                     size="large"
                     onClick={onSetClickHandler}
                     disabled={isSetDisable}

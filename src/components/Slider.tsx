@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import {changeSettingsAC, CounterType, setMaxValueAC, setStartValueAC} from "../redux/state-reducer";
@@ -13,7 +13,7 @@ export default function RangeSlider() {
 
     const dispatch = useDispatch()
 
-    const [value, setValue] = React.useState<number[]>([counter.startValue, counter.maxValue]);
+    const [value, setValue] = useState<number[]>([counter.startValue, counter.maxValue]);
 
     const handleChange = (event: any, newValue: number | number[]) => {
         setValue(newValue as number[]);
