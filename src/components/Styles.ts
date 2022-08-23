@@ -18,10 +18,11 @@ export const useStyles = makeStyles(() =>
             flexDirection: "column",
             alignItems: 'center',
             justifyContent: "end",
+
         },
         paper: {
             height: '100%',
-            padding: 5
+            padding: '5px 15px 20px'
         }
     })
 );

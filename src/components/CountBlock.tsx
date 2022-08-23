@@ -41,7 +41,11 @@ export function CountBlock() {
                 style={(counter.count === counter.maxValue || counter.startValue === counter.maxValue) ? {color: "red"} : {}}>
                 <p>{getCondition()}</p>
             </Box>
-            <ButtonGroup disableElevation variant="contained" size='large' style={{marginTop: 30}}>
+            <ButtonGroup disableElevation
+                         variant="outlined"
+                         color="primary"
+                         size='large'
+                         style={{marginTop: 30}}>
                 <Button onClick={onIncClickHandler}
                         disabled={counter.count === counter.maxValue || counter.startValue < 0 || counter.isSettings}>
                     Inc
