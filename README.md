@@ -1,3 +1,3 @@
 # Counter Redux
 
-Вы можете посмотреть сайт [здесь](https://beetlejuice.site)
+You can view the website [here](https://beetlejuice.site)
