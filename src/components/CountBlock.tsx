@@ -35,10 +35,16 @@ export function CountBlock() {
         }
     }
 
+    const isTextRed =
+        counter.maxValue === counter.count ||
+        counter.maxValue <= counter.startValue ||
+        counter.startValue < 0 ||
+        counter.maxValue <= 0
+
     return (
         <Box className={classes.box}>
             <Box
-                style={(counter.count === counter.maxValue || counter.startValue === counter.maxValue) ? {color: "red"} : {}}>
+                style={(isTextRed) ? {color: "red"} : {color: 'steelblue'}}>
                 <p>{getCondition()}</p>
             </Box>
             <ButtonGroup disableElevation
