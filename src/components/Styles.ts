@@ -23,6 +23,10 @@ export const useStyles = makeStyles(() =>
         paper: {
             height: '100%',
             padding: '5px 15px 20px'
+        },
+        input: {
+            marginLeft: 10,
+            maxWidth: 100
         }
     })
 );
